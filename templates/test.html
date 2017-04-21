@@ -1,0 +1,63 @@
+<html>
+<head>
+<title>Processed result</title>
+  <meta charset="utf-8">
+       <style type="text/css">
+           
+
+                 .container {
+        max-width: 500px;
+        padding-top: 100px;
+      }
+	
+	table {
+		border-collapse: collapse;
+		width: 100%;
+	}
+
+	th, td {
+		text-align: left;
+		padding: 5px;
+	}
+
+	tr:nth-child(even){background-color: #f2f2f2}
+        </style>
+</head>
+<body>
+
+
+
+      <form action="processed_file" method="post" enctype="multipart/form-data">
+       
+
+	        <input type="submit" value="Click Here to download processed file">
+      </form>
+
+
+
+
+    <table border = 2 align = center>
+        
+        <script src="http://d3js.org/d3.v3.min.js"></script>
+       <script type="text/javascript"charset="utf-8">
+            d3.text("{{csv_name}}", function(data) {
+                var parsedCSV = d3.csv.parseRows(data);
+
+                var container = d3.select("body")
+                    .append("table")
+
+                    .selectAll("tr")
+                        .data(parsedCSV).enter()
+                        .append("tr")
+
+                    .selectAll("td")
+                        .data(function(d) { return d; }).enter()
+                        .append("td")
+                        .text(function(d) { return d; });
+            });
+        </script>
+
+	</table> 
+   
+</body>
+</html>
